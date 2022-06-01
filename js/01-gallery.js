@@ -13,6 +13,7 @@ const imageMarkup = createGalleryItems(galleryItems);
 gallery.insertAdjacentHTML("beforeend", imageMarkup);
 
 gallery.addEventListener("click", onGalleryClick);
+gallery.addEventListener("click", onModalOpen);
 
 function createGalleryItems(galleryItems) {
   return galleryItems
@@ -40,9 +41,11 @@ function onGalleryClick(e) {
   if (!isImgEl) {
     return;
   }
+}
 
+function onModalOpen(e) {
   const bigImg = e.target.dataset.source;
-  const instance = basicLightbox.create(`< img src = "${bigImg}" >`);
+  const instance = basicLightbox.create(`<img src = "${bigImg}">`);
 
   instance.show();
 }
