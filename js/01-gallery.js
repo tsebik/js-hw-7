@@ -14,6 +14,7 @@ gallery.insertAdjacentHTML("beforeend", imageMarkup);
 
 gallery.addEventListener("click", onGalleryClick);
 gallery.addEventListener("click", onModalOpen);
+gallery.removeEventListener("click", onModalClose);
 
 function createGalleryItems(galleryItems) {
   return galleryItems
@@ -44,8 +45,18 @@ function onGalleryClick(e) {
 }
 
 function onModalOpen(e) {
+  if (e.target.nodeName !== "IMG") {
+    return;
+  }
   const bigImg = e.target.dataset.source;
   const instance = basicLightbox.create(`<img src = "${bigImg}">`);
 
   instance.show();
+}
+
+function onModalClose(e) {
+  const bigImg = e.target.dataset.source;
+  const instance = basicLightbox.create(`<img src = "${bigImg}">`);
+
+  instance.close();
 }
